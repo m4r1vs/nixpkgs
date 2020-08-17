@@ -13464,7 +13464,6 @@ with pkgs;
   freerdpUnstable = freerdp;
 
   gimp = callPackage ../applications/graphics/gimp {
-    autoreconfHook = buildPackages.autoreconfHook269;
     lcms = lcms2;
     inherit (darwin.apple_sdk.frameworks) AppKit Cocoa;
   };
