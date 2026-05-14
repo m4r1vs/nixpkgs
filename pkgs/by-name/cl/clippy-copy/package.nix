@@ -27,7 +27,28 @@ buildGoModule (finalAttrs: {
   ];
 
   # Tests require access to the system clipboard (unavailable in sandbox)
-  doCheck = false;
+  doCheck = true;
+  checkFlags = let
+    skippedTests = [
+      "TestClipboard"
+      "TestConfig"
+      "TestConfigFile"
+      "TestFile"
+      "TestFileMode"
+      "TestFlags"
+      "TestGetUTIForFile"
+      "TestMultiple"
+      "TestMultipleFiles"
+      "TestPasty"
+      "TestPipelines"
+      "TestSearch"
+      "TestStream"
+      "TestStreamMode"
+      "TestUTIConformance"
+    ];
+  in [
+    "-skip=^(${lib.concatStringsSep "|" skippedTests})$"
+  ];
 
   doInstallCheck = true;
   nativeInstallCheckInputs = [ versionCheckHook ];
